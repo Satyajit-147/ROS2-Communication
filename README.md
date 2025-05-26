@@ -13,11 +13,11 @@ ROS1 lacks most important requirements such as:
 
 ## ROS2 vs ROS1 Communication:
 
-In ROS 1:
+### ROS 1:
 - A central server node, **Master node** is required to ensure communcation between nodes
 - Communcation protocols: TCP ROS and UDP ROS
 
-### TCP ROS
+#### TCP ROS (Transmission Control Protocol)
 TCP ROS protocol works by establishing a connection between sender and reciever (Handshaking). Once connection is established, the protocol breaks down the message into packets called segments and assigns a number to each packet to represent the order in which the message needs to be delivered.
 
 Key Features of TCP:
@@ -30,6 +30,19 @@ Key Features of TCP:
 | Flow Control      | Controls data flow to avoid overwhelming receiver          |
 | Congestion Control| Adjusts transmission rate based on network congestion      |
 | Stream-Oriented   | Data is transmitted as a continuous stream of bytes        |
+
+#### UDP ROS (User Datagram Protocol)
+UDP ROS is a connectionless protocol that works by sending data packets called datagrams without establishing a prior connection (No Handshaking). Each datagram includes the source and destination address but no sequence numbers.
+
+Key Features of UDP:
+| Feature           | Description                                                |
+|-------------------|------------------------------------------------------------|
+| Connectionless    | No setup required; packets sent independently               |
+| Unreliable        | No guarantee of packet delivery, order, or duplication avoidance |
+| No Congestion Control | Sender can flood network, possibly causing packet loss    |
+| No Flow Control   | No mechanism to slow down sender if receiver is overwhelmed |
+| Low Overhead      | Minimal header and processing overhead                       |
+| Message-Oriented  | Each packet is independent, treated as a separate message    |
 
 
 In ROS 2:
