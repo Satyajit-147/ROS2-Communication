@@ -21,15 +21,15 @@ ROS1 lacks most important requirements such as:
 TCP ROS protocol works by establishing a connection between sender and reciever (Handshaking). Once connection is established, the protocol breaks down the message into packets called segments and assigns a number to each packet to represent the order in which the message needs to be delivered.
 
 Key Features of TCP:
-| Feature           | Description                                               |
-|-------------------|-----------------------------------------------------------|
-| Connection-Oriented | Requires connection setup before data transfer             |
-| Reliable          | Guarantees data delivery without loss                      |
-| Ordered Delivery  | Data arrives in the same order as sent                      |
-| Error Checking    | Detects and retransmits lost or corrupted packets          |
-| Flow Control      | Controls data flow (doesn't transmit when the network is busy)         |
-| Congestion Control| Adjusts transmission rate based on network congestion      |
-| Stream-Oriented   | Data is transmitted as a continuous stream of bytes        |
+| Feature           | Description                                                                   |
+|-------------------|-------------------------------------------------------------------------------|
+| Connection-Oriented | Requires connection setup before data transfer                                  |
+| Reliable          | Guarantees data delivery without loss                                           |
+| Ordered Delivery  | Data arrives in the same order as sent                                          |
+| Error Checking    | Detects and retransmits lost or corrupted packets                              |
+| Flow Control      | Controls data flow (doesn't transmit when the network is busy)                             |
+| Congestion Control| Adjusts transmission rate based on network congestion                           |
+| Stream-Oriented   | Data is transmitted as a continuous stream of bytes                            |
 
 #### UDP ROS (User Datagram Protocol)
 UDP ROS is a connectionless protocol that works by sending data packets called datagrams without establishing a prior connection (No Handshaking). Each datagram includes the source and destination address but no sequence numbers.
