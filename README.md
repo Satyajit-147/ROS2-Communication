@@ -1,4 +1,4 @@
-# ROS 2 Communication Overview
+# ROS 2 Communication - Week 2
 
 This document summarizes the core communication concepts in **ROS 2**, with a focus on its decentralized architecture and the technologies that enable it.
 
