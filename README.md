@@ -49,91 +49,60 @@ Key Features of UDP:
 | Message-Oriented  | Each packet is independent, treated as a separate message                                                |
 
 
-In ROS 2:
-- The system is **fully decentralized**.
-- It uses the **Data Distribution Service (DDS)** middleware to support robust, scalable, and flexible communication.
+### ROS2
+ROS 2 uses a decentralized system instead of a central Master Node. It relies on the DDS (Data Distribution Service) protocol, which allows nodes to automatically discover each other and communicate directly in a peer-to-peer manner.
 
-This shift improves:
-- **Reliability** (no single point of failure)
-- **Scalability** (more devices, more nodes)
-- **Real-time performance**
-- **Support for embedded and distributed systems**
+#### Problems with Master Node
+- If it fails, the system breaks
+- Hard to scale for many nodes
+- Needs manual setup for networking
+- No security built-in
+- Doesn’t work well with changing networks
+- Slows things down by handling all discovery
 
----
+#### DDS (Data Dsitribution Service)
+DDS is a protocol thst enables real-time/high-performance data exchange between publishers and subscribers
 
-## 🌐 DDS (Data Distribution Service)
+#### How DDS Works in ROS 2
+Publishers and Subscribers are created like in ROS 1.
 
-- DDS is a **middleware protocol** used in ROS 2 to handle message exchange between nodes.
-- Based on the **publish-subscribe** model.
-- Manages **automatic discovery**, **data serialization**, **transport protocols**, **QoS settings**, and more.
+DDS handles:
+- Finding other nodes (discovery)
+- Managing data flow (communication)
+- Handling network issues, retries, etc.
+- Communication is peer-to-peer, meaning each node sends data directly to interested nodes (subscribers), without a central hub.
 
-**Advantages of DDS:**
-- Decentralized communication
-- Built-in discovery
-- Multiple transport layers (TCP, UDP)
-- Quality of Service (QoS) control (latency, reliability, deadline, etc.)
+#### Peer-to-Peer Communication in ROS2
+Peer-to-peer (P2P) communication means that each node (peer) in the ROS 2 network communicates directly with other nodes without needing to route messages through a central server or broker.
 
----
+- Nodes communicate **directly with each other** without a central server.
+- DDS handles **discovery** of nodes and their topics automatically.
+- Once discovered, nodes establish **direct network connections** (between the publisher and the subscriber).
+- Publishers send data **straight to matching subscribers**.
+- Communication uses **UDP or TCP** (to transmit the message), managed by DDS.
+- **Quality of Service (QoS)** settings control reliability and performance.
+- No single point of failure — if one node fails, others keep working.
+- Direct links reduce **latency** and improve speed.
+- System can **scale easily** by adding more nodes without bottlenecks.
+- Nodes can **join or leave anytime** without disrupting others.
+- DDS optimizes connections for **real-time performance**.
 
-## 📡 Communication Protocols
 
-### 1. **UDP (User Datagram Protocol)**
-- DDS often uses **UDP** for faster, connectionless message passing.
-- Suitable for real-time or lossy environments (e.g., robotics, drones).
-- Supports **multicast**, helping in efficient data distribution to multiple subscribers.
+#### QoS (Quality of Service):
+This enables the user to customize the behaviour of message delivery between subscriber and the publisher. It allows the user to add more detail to the reliability, delivery timing, and data lifespan of the message being delivered. A publisher can only send the message to the subscriber if their QoS profiles match (compatible). 
 
-### 2. **TCP (Transmission Control Protocol)**
-- Also supported via DDS when reliability is prioritized over speed.
-- Ensures message delivery but adds latency.
+Some QoS Policies:
+| **QoS Policy** | **Options** | **Explanation** |
+|----------------|-------------|------------------|
+| **Reliability** | `RELIABLE`, `BEST_EFFORT` | `RELIABLE` ensures all messages are received (with retries). `BEST_EFFORT` delivers messages if possible (no retries). |
+| **Durability** | `VOLATILE`, `TRANSIENT_LOCAL` | `TRANSIENT_LOCAL` stores the last message so late-joining subscribers can receive it. `VOLATILE` does not. |
+| **History** | `KEEP_LAST`, `KEEP_ALL` | `KEEP_LAST(n)` keeps only the last `n` samples. `KEEP_ALL` stores every message (needs more memory). |
+| **Deadline** | Time duration | Specifies how often a message is expected. DDS checks if messages come within the deadline. |
+| **Liveliness** | `AUTOMATIC`, `MANUAL_BY_TOPIC` | Determines how DDS knows a node is alive. Useful for fault detection. |
+| **Lifespan** | Time duration | Limits how long a message is valid. After that, it’s discarded even if not delivered. |
 
-DDS can **dynamically select** the best transport protocol depending on system needs and QoS settings.
 
----
 
-## 🤝 Peer-to-Peer Discovery
 
-- ROS 2 nodes **discover each other automatically** without needing a central master.
-- Every node broadcasts its presence over the network using **Simple Discovery Protocol (SDP)** provided by DDS.
-- This enables **true peer-to-peer communication**.
 
-### Benefits:
-- Resilience to failure
-- Flexible in dynamic environments
-- Suitable for distributed and multi-robot systems
-
----
-
-## 🗺️ Discovery Server (Optional for ROS 2)
-
-While peer-to-peer discovery works well, large networks can suffer from discovery overhead.
-
-**Discovery Server**:
-- An optional DDS feature used to improve performance in large or complex networks.
-- Acts as a lightweight coordinator that stores and shares node information.
-- Used in cases like:
-  - Multi-robot systems across WANs
-  - Reducing discovery traffic
-  - Improving startup time in massive deployments
-
----
-
-## ✅ Summary
-
-| Feature                  | ROS 1                          | ROS 2 (with DDS)                    |
-|--------------------------|--------------------------------|-------------------------------------|
-| Central Master           | Required                       | ❌ Not required                     |
-| Communication            | Custom TCP (ROS TCPROS)        | DDS (UDP, TCP, Multicast)           |
-| Discovery                | Centralized (via master)       | Peer-to-peer (via DDS)              |
-| Scalability              | Limited                        | High (supports distributed systems) |
-| Fault Tolerance          | Low (master failure = halt)    | High (no single point of failure)   |
-| QoS Control              | ❌ No                          | ✅ Yes (latency, reliability, etc.)  |
-
----
-
-## 📚 References
-- ROS 2 Documentation: https://docs.ros.org/en/rolling/index.html
-- DDS Overview by OMG: https://www.omg.org/spec/DDS/
-- Fast DDS Discovery Server: https://fast-dds.docs.eprosima.com/en/latest/
-
----
 
