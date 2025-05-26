@@ -4,7 +4,7 @@ This document summarizes the core communication concepts in **ROS 2**, with a fo
 
 ## Why ROS2?
 
-ROS1 lacks most important requirements such as:
+ROS1 lacks important requirements such as:
 - Real-time communication (uses a central master node and TCP-based communication)
 - Safety (no built-in support for secure communication)
 - Security (no encryption and authentication of nodes and there is no way to communcate if the master node breaks down)
