@@ -1,14 +1,36 @@
-# 🧠 ROS 2 Communication Overview
+# ROS 2 Communication Overview
 
 This document summarizes the core communication concepts in **ROS 2**, with a focus on its decentralized architecture and the technologies that enable it.
 
----
+## Why ROS2?
 
-## 🚀 Why ROS 2 Moved Away from ROS 1's Model
+ROS1 lacks most important requirements such as:
+- Real-time communication (uses a central master node and TCP-based communication)
+- Safety (no built-in support for secure communication)
+- Security (no encryption and authentication of nodes and there is no way to communcate if the master node breaks down)
+- Certification
+- Compatibility (libraries and packages may not be the same in all versions of ROS1)
+
+## ROS2 vs ROS1 Communication:
 
 In ROS 1:
-- A **central ROS Master** handled name resolution, node registration, and topic/service discovery.
-- If the master failed or disconnected, **all node communication stopped**, making it unsuitable for large-scale, real-time, or distributed robotic systems.
+- A central server node, **Master node** is required to ensure communcation between nodes
+- Communcation protocols: TCP ROS and UDP ROS
+
+### TCP ROS
+TCP ROS protocol works by establishing a connection between sender and reciever (Handshaking). Once connection is established, the protocol breaks down the message into packets called segments and assigns a number to each packet to represent the order in which the message needs to be delivered.
+
+Key Features of TCP:
+| Feature           | Description                                               |
+|-------------------|-----------------------------------------------------------|
+| Connection-Oriented | Requires connection setup before data transfer             |
+| Reliable          | Guarantees data delivery without loss                      |
+| Ordered Delivery  | Data arrives in the same order as sent                      |
+| Error Checking    | Detects and retransmits lost or corrupted packets          |
+| Flow Control      | Controls data flow to avoid overwhelming receiver          |
+| Congestion Control| Adjusts transmission rate based on network congestion      |
+| Stream-Oriented   | Data is transmitted as a continuous stream of bytes        |
+
 
 In ROS 2:
 - The system is **fully decentralized**.
