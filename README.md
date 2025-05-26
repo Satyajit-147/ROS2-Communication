@@ -40,7 +40,6 @@ Key Features of UDP:
 | Connectionless     | No setup required; packets sent independently                         |
 | Unreliable         | No guarantee of packet delivery, order, or duplication avoidance      |
 | No Congestion      | Sender can flood network, possibly causing packet loss                |
-| Control            |                                                                        |
 | No Flow Control    | No mechanism to slow down sender if receiver is overwhelmed           |
 | Low Overhead       | Minimal header and processing overhead (only 8-bits long and          |
 |                    | contains essential information like length of datagram, source and    |
