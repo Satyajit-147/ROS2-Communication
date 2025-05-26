@@ -27,7 +27,7 @@ Key Features of TCP:
 | Reliable          | Guarantees data delivery without loss                      |
 | Ordered Delivery  | Data arrives in the same order as sent                      |
 | Error Checking    | Detects and retransmits lost or corrupted packets          |
-| Flow Control      | Controls data flow to avoid overwhelming receiver          |
+| Flow Control      | Controls data flow (doesn't transmit when the network is busy)         |
 | Congestion Control| Adjusts transmission rate based on network congestion      |
 | Stream-Oriented   | Data is transmitted as a continuous stream of bytes        |
 
