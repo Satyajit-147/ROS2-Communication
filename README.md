@@ -41,7 +41,7 @@ Key Features of UDP:
 | Unreliable        | No guarantee of packet delivery, order, or duplication avoidance |
 | No Congestion Control | Sender can flood network, possibly causing packet loss    |
 | No Flow Control   | No mechanism to slow down sender if receiver is overwhelmed |
-| Low Overhead      | Minimal header and processing overhead                       |
+| Low Overhead      | Minimal header and processing overhead (only 8-bits long and contains essentail information like length of datagram, source and destination port)                      |
 | Message-Oriented  | Each packet is independent, treated as a separate message    |
 
 
