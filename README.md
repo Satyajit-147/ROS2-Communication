@@ -35,15 +35,17 @@ Key Features of TCP:
 UDP ROS is a connectionless protocol that works by sending data packets called datagrams without establishing a prior connection (No Handshaking). Each datagram includes the source and destination address but no sequence numbers.
 
 Key Features of UDP:
-| Feature           | Description                                                |
-|-------------------|------------------------------------------------------------|
-| Connectionless    | No setup required; packets sent independently               |
-| Unreliable        | No guarantee of packet delivery, order, or duplication avoidance |
-| No Congestion Control | Sender can flood network, possibly causing packet loss    |
-| No Flow Control   | No mechanism to slow down sender if receiver is overwhelmed |
-| Low Overhead      | Minimal header and processing overhead (only 8-bits long and contains essentail information like length of datagram, source and destination port)                      |
-| Message-Oriented  | Each packet is independent, treated as a separate message    |
-
+| Feature            | Description                                                           |
+|--------------------|------------------------------------------------------------------------|
+| Connectionless     | No setup required; packets sent independently                         |
+| Unreliable         | No guarantee of packet delivery, order, or duplication avoidance      |
+| No Congestion      | Sender can flood network, possibly causing packet loss                |
+| Control            |                                                                        |
+| No Flow Control    | No mechanism to slow down sender if receiver is overwhelmed           |
+| Low Overhead       | Minimal header and processing overhead (only 8-bits long and          |
+|                    | contains essential information like length of datagram, source and    |
+|                    | destination port)                                                     |
+| Message-Oriented   | Each packet is independent, treated as a separate message             |
 
 In ROS 2:
 - The system is **fully decentralized**.
